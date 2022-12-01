@@ -1,4 +1,4 @@
-# [Vue.js 시작하기](https://www.inflearn.com/course/vue-pwa-vue-js-중급)
+# [Vue.js 중급 강좌](https://www.inflearn.com/course/vue-pwa-vue-js-중급)
 
 ## TODO List
 
@@ -16,4 +16,11 @@
 ```
 - ES6를 이용한 효율적이고 간결한 Vue.js 코딩
 - Vuex를 이용한 상태 관리 이해 및 적용
+    - Vuex 기술 요소 (state, getters, mutationss, actions)
+        - state : 여러 컴포넌트에 공유되는 데이터 - data
+        - getters : 연산된 state 값을 접근하는 속성 - computed
+        - mutations: state 값을 변경하는 이벤트 로직 및 메서드 - methods
+        - actions : 비동기 처리 로직을 선언하는 메서드 - async methods
+    - Vuex Helpers
+    - 프로젝트 구조화 및 모듈화
 ```

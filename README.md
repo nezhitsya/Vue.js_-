@@ -38,3 +38,8 @@
     ```
     ctrl + c
     ```
+- Vuex
+    - 설치
+    ```
+    npm i vuex@3.6.2 --save
+    ```
