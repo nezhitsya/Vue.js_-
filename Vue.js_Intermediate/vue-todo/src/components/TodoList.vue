@@ -1,45 +1,62 @@
 <template>
   <div>
     <transition-group name="list" tag="ul">
-    <!-- ul>li*3 -->
-    <!-- <ul> -->
+      <!-- ul>li*3 -->
+      <!-- <ul> -->
       <!-- v-for="(todoItem, index) in propsdata" -->
+      <!-- v-for="(todoItem, index) in this.$store.state.todoItems" -->
+      <!-- v-for="(todoItem, index) in this.$store.getters.storedTodoItems" -->
+      <!-- v-for="(todoItem, index) in this.todoItems" -->
       <li
-        v-for="(todoItem, index) in this.$store.state.todoItems"
+        v-for="(todoItem, index) in this.storedTodoItems"
         v-bind:key="todoItem.item"
         class="shadow"
       >
         <i
           class="checkBtn fa-solid fa-check"
           v-bind:class="{ checkBtnCompleted: todoItem.completed }"
-          v-on:click="toggleComplete(todoItem, index)"
+          v-on:click="toggleComplete({ todoItem, index })"
         ></i>
-        <span v-bind:class="{ textCompleted: todoItem.completed }">{{ todoItem.item }}</span>
-        <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+        <span v-bind:class="{ textCompleted: todoItem.completed }">{{
+          todoItem.item
+        }}</span>
+        <span class="removeBtn" v-on:click="removeTodo({ todoItem, index })">
           <i class="fa-solid fa-trash"></i>
         </span>
       </li>
-    <!-- </ul> -->
+      <!-- </ul> -->
     </transition-group>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
+
 export default {
   methods: {
-    removeTodo(todoItem, index) {
-      // this.$emit("removeItem", todoItem, index);
-      const obj = {
-        todoItem: todoItem,
-        index: index
-      };
-      // this.$store.commit("removeOneItem", { todoItem, index });
-      this.$store.commit("removeOneItem", obj);
-    },
-    toggleComplete(todoItem, index) {
-      // this.$emit("toggleItem", todoItem, index);
-      this.$store.commit("toggleOneItem", { todoItem, index });
-    },
+    ...mapMutations({
+      removeTodo: "removeOneItem",
+      toggleComplete: "toggleOneItem",
+    }),
+    // removeTodo(todoItem, index) {
+    // this.$emit("removeItem", todoItem, index);
+    // const obj = {
+    //   todoItem: todoItem,
+    //   index: index
+    // };
+    // this.$store.commit("removeOneItem", { todoItem, index });
+    // this.$store.commit("removeOneItem", obj);
+    // },
+    // toggleComplete(todoItem, index) {
+    //   // this.$emit("toggleItem", todoItem, index);
+    //   this.$store.commit("toggleOneItem", { todoItem, index });
+    // },
+  },
+  computed: {
+    // todoItems() {
+    //   return this.$store.getters.storedTodoItems;
+    // }
+    ...mapGetters(["storedTodoItems"]),
   },
 };
 </script>
@@ -79,11 +96,13 @@ li {
 }
 
 /* 리스트 아이템 트랜지션 효과*/
-.list-enter-active, .list-leave-active {
-    transition: all 1s;
+.list-enter-active,
+.list-leave-active {
+  transition: all 1s;
 }
-.list-enter, .list-leave-to {
-    opacity: 0;
-    transform: translateY(30px);
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>
