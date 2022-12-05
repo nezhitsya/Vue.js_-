@@ -43,3 +43,8 @@
     ```
     npm i vuex@3.6.2 --save
     ```
+- Vue Router
+    - 설치
+    ```
+    npm i vue-router@3.5.3 --save
+    ```
