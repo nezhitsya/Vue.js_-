@@ -29,6 +29,7 @@
 // import { fetchNewsList } from "../api/index.js";
 // import { mapGetters, mapState } from 'vuex';
 import ListItem from "../components/ListItem.vue";
+import bus from "../utils/bus.js";
 
 export default {
   components: {
@@ -50,29 +51,40 @@ export default {
 
   //   ...mapGetters(["fetchedNews"]),
   // },
-  // created() {
-  // var vm = this;
-  // axios
-  //   .get("https://api.hnpwa.com/v0/news/1.json")
-  //   .then(function (response) {
-  //     console.log(response);
-  //     vm.news = response.data;
-  //   })
-  //   .catch(function(error) {
-  //     console.log(error);
-  //   });
+  created() {
+    // var vm = this;
+    // axios
+    //   .get("https://api.hnpwa.com/v0/news/1.json")
+    //   .then(function (response) {
+    //     console.log(response);
+    //     vm.news = response.data;
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   });
 
-  // fetchNewsList()
-  //   .then(response => {
-  //     console.log(response);
-  //     this.news = response.data;
-  //   })
-  //   .catch(error => {
-  //     console.log(error);
-  //   });
+    // fetchNewsList()
+    //   .then(response => {
+    //     console.log(response);
+    //     this.news = response.data;
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
 
-  //   this.$store.dispatch("FETCH_NEWS");
-  // },
+    bus.$emit("start:spinner");
+
+    setTimeout(() => {
+      this.$store
+        .dispatch("FETCH_NEWS")
+        .then(() => {
+          bus.$emit("end:spinner");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+  },
 };
 </script>
 

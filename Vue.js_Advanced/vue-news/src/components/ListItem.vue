@@ -41,15 +41,16 @@ export default {
   computed: {
     ...mapGetters(["fetchedNews", "fetchedAsk", "fetchedJobs"]),
     listItems() {
-      const name = this.$route.name;
+      return this.$store.state.list;
+      // const name = this.$route.name;
 
-      if (name === "news") {
-        return this.fetchedNews;
-      } else if (name === "ask") {
-        return this.fetchedAsk;
-      } else if (name === "jobs") {
-        return this.fetchedJobs;
-      }
+      // if (name === "news") {
+      //   return this.fetchedNews;
+      // } else if (name === "ask") {
+      //   return this.fetchedAsk;
+      // } else if (name === "jobs") {
+      //   return this.fetchedJobs;
+      // }
     },
   },
   created() {
